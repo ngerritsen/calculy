@@ -2,7 +2,7 @@
 
 Lightweight, zero dependency calculator engine.
 
-_Only ~2kB min + gzipped! ✨_
+_Only ≈2kB min + gzipped! ✨_
 
 ## Installation
 
@@ -48,13 +48,13 @@ Calculy supports most basic algebra that you would need for regular calculations
 
 ### Constants
 
-`e` ~ 2.718281828459045
+`e` ≈ 2.718281828459045
 
-`π` or `pi` ~ 3.141592653589793
+`π` or `pi` ≈ 3.141592653589793
 
-`φ` or `phi` ~ 1.618033988749895
+`φ` or `phi` ≈ 1.618033988749895
 
-`τ ` or `tau` ~ 6.283185307179586
+`τ ` or `tau` ≈ 6.283185307179586
 
 ### Ans
 
@@ -64,7 +64,7 @@ calculy.evaluate('ans*2', 3); // 6
 
 ### Shorthand multiplication
 
-`2pi` ~ 6.283185307179586
+`2pi` ≈ 6.283185307179586
 
 `(4-2)(3-4)` = -2
 
@@ -92,7 +92,7 @@ calculy.evaluate('ans*2', 3); // 6
 
 `5!` = 5
 
-`0.5!` ~ 0.8862269254527586
+`0.5!` ≈ 0.8862269254527586
 
 ### Roots
 
@@ -116,13 +116,13 @@ calculy.evaluate('ans*2', 3); // 6
 
 `cos(2pi)` = 1
 
-`tan(pi/4)` ~ 1
+`tan(pi/4)` ≈ 1
 
-`asin(0.5)` ~ 0.5235987755982989
+`asin(0.5)` ≈ 0.5235987755982989
 
-`acos(0.5)` ~ 1.0471975511965979
+`acos(0.5)` ≈ 1.0471975511965979
 
-`atan(0.5)` ~ 0.4636476090008061
+`atan(0.5)` ≈ 0.4636476090008061
 
 ### Other functions
 
