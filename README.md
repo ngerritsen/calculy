@@ -56,6 +56,12 @@ Calculy supports most basic algebra that you would need for regular calculations
 
 `τ ` or `tau` ~ 6.283185307179586
 
+### Ans
+
+```js
+calculy.evaluate('ans*2', 3); // 6
+```
+
 ### Shorthand multiplication
 
 `2pi` ~ 6.283185307179586
