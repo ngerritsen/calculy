@@ -1,0 +1,43 @@
+{
+  "name": "calculy",
+  "version": "1.0.0",
+  "description": "Lightweight, zero dependency calculator engine",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "babel-jest": "^26.3.0",
+    "concurrently": "^5.3.0",
+    "eslint": "^7.9.0",
+    "eslint-config-prettier": "^6.11.0",
+    "husky": "^4.3.0",
+    "jest": "^26.4.2",
+    "prettier": "^2.1.2"
+  },
+  "scripts": {
+    "test": "concurrently 'jest' 'eslint' 'prettier --check .'",
+    "fix": "concurrently 'eslint --fix' 'prettier --write .'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ngerritsen/calculy.git"
+  },
+  "keywords": [
+    "calculator",
+    "engine",
+    "algebra",
+    "parser"
+  ],
+  "author": "Niels Gerritsen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ngerritsen/calculy/issues"
+  },
+  "homepage": "https://github.com/ngerritsen/calculy#readme",
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test"
+    }
+  }
+}
