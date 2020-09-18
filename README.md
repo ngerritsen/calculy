@@ -16,9 +16,12 @@ npm install calculy
 import calculy from 'calculy';
 
 calculy.evaluate('1+2(3!)^2'); // 73
+calculy.evaluate('ans*2', { ans: 3 }); // 6
+calculy.evaluate('cos(90)'); // -0.44807361612
+calculy.evaluate('cos(90)', { deg: true }); // 0
 ```
 
-You could directly include `./dist/calculy.min.js` from the npm package. This will make calculy available as the global variable `Calculy`.
+You can also directly include `./dist/calculy.min.js` from the npm package. This will make calculy available as the global variable `Calculy`.
 
 ## Syntax
 
@@ -58,9 +61,7 @@ Calculy supports most basic algebra that you would need for regular calculations
 
 ### Ans
 
-```js
-calculy.evaluate('ans*2', 3); // 6
-```
+`ans*2` = 3 (if the provided ans is 3)
 
 ### Shorthand multiplication
 
@@ -110,7 +111,7 @@ calculy.evaluate('ans*2', 3); // 6
 
 `ln(e)` or `log(e, e)` = 3
 
-### Trinometry
+### Trigonometry
 
 `sin(pi/2)` = 1
 
@@ -139,3 +140,22 @@ calculy.evaluate('ans*2', 3); // 6
 `ceil(2.2)` = 3
 
 `ceil(2.2)` = 3
+
+## API
+
+## `calculy.evaluate(code: string, [options: Object]) => Number`
+
+Will execute the math and give the answer. Can throw a `SyntaxError`.
+
+### Options
+
+- `ans`: The previous answer. (default: `0`)
+- `deg`: Whether to use degrees instead instead of radians for trigonometry functions. (default: `false`)
+
+## `calculy.parse(code: string) => Object`
+
+Will return the raw AST, useful for custom evaluation.
+
+## `calculy.tokenize(code: string) => string[]`
+
+Will return a list of the tokens that calculy parses. Can come in handy for input validation/formatting.

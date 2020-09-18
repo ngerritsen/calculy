@@ -29,6 +29,11 @@ test('Functions.', () => {
   expect(calculy.evaluate('cos(3)+3')).toBe(Math.cos(3) + 3);
 });
 
+test('Degree mode', () => {
+  expect(calculy.evaluate('cos(180)')).toBe(Math.cos(180));
+  expect(calculy.evaluate('cos(180)', { deg: true })).toBe(-1);
+});
+
 test('Logarithms.', () => {
   expect(calculy.evaluate('log(1000)')).toBe(3);
   expect(calculy.evaluate('log(8, 2)')).toBe(3);
@@ -109,7 +114,7 @@ test('Scientific big number notation.', () => {
 });
 
 test('Ans.', () => {
-  expect(calculy.evaluate('ans', 2)).toBe(2);
-  expect(calculy.evaluate('ans^2', 2)).toBe(4);
+  expect(calculy.evaluate('ans', { ans: 2 })).toBe(2);
+  expect(calculy.evaluate('ans^2', { ans: 2 })).toBe(4);
   expect(calculy.evaluate('ans')).toBe(0);
 });

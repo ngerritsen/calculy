@@ -1,42 +1,40 @@
 import log from './math/log';
 import random from './math/random';
+import validate from './validate';
+import degree from './degree';
 import nthRoot from './math/nthRoot';
 
-export default {
-  '√': validateArgs(nthRoot, 1, 2),
-  abs: validateArgs(Math.abs),
-  acos: validateArgs(Math.acos),
-  asin: validateArgs(Math.asin),
-  atan: validateArgs(Math.atan),
-  cbrt: validateArgs(Math.cbrt),
-  ceil: validateArgs(Math.ceil),
-  cos: validateArgs(Math.cos),
-  floor: validateArgs(Math.floor),
-  ln: validateArgs(Math.log),
-  log: validateArgs(log, 1, 2),
-  nthroot: validateArgs(nthRoot, 1, 2),
-  rand: validateArgs(random, 0, 2),
-  root: validateArgs(nthRoot, 1, 2),
-  round: validateArgs(Math.round),
-  sin: validateArgs(Math.sin),
-  sqrt: validateArgs(Math.sqrt),
-  tan: validateArgs(Math.tan),
+const functions = {
+  '√': validate(nthRoot, 1, 2),
+  abs: validate(Math.abs),
+  acos: validate(Math.acos),
+  asin: validate(Math.asin),
+  atan: validate(Math.atan),
+  cbrt: validate(Math.cbrt),
+  ceil: validate(Math.ceil),
+  cos: validate(Math.cos),
+  floor: validate(Math.floor),
+  ln: validate(Math.log),
+  log: validate(log, 1, 2),
+  nthroot: validate(nthRoot, 1, 2),
+  rand: validate(random, 0, 2),
+  root: validate(nthRoot, 1, 2),
+  round: validate(Math.round),
+  sin: validate(Math.sin),
+  sqrt: validate(Math.sqrt),
+  tan: validate(Math.tan),
 };
 
-function validateArgs(func, min = 1, max = min) {
-  return (...args) => {
-    if (args.length < min) {
-      throw new Error(
-        `A minimum of ${min} arguments required for ${func.name}, ${args.length} provided.`
-      );
-    }
+const degFunctions = {
+  ...functions,
+  acos: degree(validate(Math.acos)),
+  asin: degree(validate(Math.asin)),
+  atan: degree(validate(Math.atan)),
+  cos: degree(validate(Math.cos)),
+  sin: degree(validate(Math.sin)),
+  tan: degree(validate(Math.tan)),
+};
 
-    if (args.length > max) {
-      throw new Error(
-        `A maximum of ${max} arguments allowed for ${func.name}, ${args.length} provided.`
-      );
-    }
-
-    return func(...args);
-  };
+export default function getFunctions(deg) {
+  return deg ? degFunctions : functions;
 }

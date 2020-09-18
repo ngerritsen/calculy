@@ -1,5 +1,5 @@
 import constants from './constants';
-import functions from './functions';
+import getFunctions from './functions';
 
 export default function parse(tokens) {
   let position = 0;
@@ -234,5 +234,5 @@ function isConstant(token) {
 }
 
 function isFunction(token) {
-  return token && Boolean(functions[token.toLowerCase()]);
+  return token && Boolean(getFunctions()[token.toLowerCase()]);
 }
