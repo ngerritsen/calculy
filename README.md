@@ -16,7 +16,7 @@ npm install calculy
 import calculy from 'calculy';
 
 calculy.evaluate('1+2(3!)^2'); // 73
-calculy.evaluate('ans*2', { ans: 3 }); // 6
+calculy.evaluate('ans*2', { constants: { ans: 3 } }); // 6
 calculy.evaluate('cos(90)'); // -0.44807361612
 calculy.evaluate('cos(90)', { deg: true }); // 0
 ```
@@ -152,7 +152,7 @@ Will execute the math and give the answer. Can throw a `SyntaxError`.
 - `ans`: The previous answer. (default: `0`)
 - `deg`: Whether to use degrees instead instead of radians for trigonometry functions. (default: `false`)
 
-## `calculy.parse(code: string) => Object`
+## `calculy.parse(code: string, [options: Object]) => Object`
 
 Will return the raw AST, useful for custom evaluation.
 
