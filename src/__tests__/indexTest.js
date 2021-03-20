@@ -113,8 +113,10 @@ test('Scientific big number notation.', () => {
   expect(calculy.evaluate('5.2e-2-e')).toBe(0.052 - Math.E);
 });
 
-test('Ans.', () => {
-  expect(calculy.evaluate('ans', { ans: 2 })).toBe(2);
-  expect(calculy.evaluate('ans^2', { ans: 2 })).toBe(4);
-  expect(calculy.evaluate('ans')).toBe(0);
+test('Custom constants.', () => {
+  const constants = { ans: 2, x: 3, pi: 3.2 };
+
+  expect(calculy.evaluate('ans', { constants })).toBe(2);
+  expect(calculy.evaluate('x^ans', { constants })).toBe(9);
+  expect(calculy.evaluate('pi', { constants })).toBe(3.2);
 });

@@ -1,11 +1,11 @@
-import constants from './constants';
+import getConstants from './constants';
 import getFunctions from './functions';
 import factorial from './math/factorial';
 
 export default function evaluate(expression, options) {
   switch (expression.type) {
     case 'constant':
-      return constants[expression.value.toLowerCase()];
+      return getConstants(options.constants)[expression.value.toLowerCase()];
     case 'number':
       return parseFloat(expression.value);
     case 'function':
@@ -18,8 +18,6 @@ export default function evaluate(expression, options) {
       return Math.abs(evaluate(expression.of, options));
     case 'group':
       return evaluate(expression.expression, options);
-    case 'ans':
-      return options.ans;
     case '^':
       return Math.pow(
         evaluate(expression.left, options),

@@ -17,6 +17,7 @@ import calculy from 'calculy';
 
 calculy.evaluate('1+2(3!)^2'); // 73
 calculy.evaluate('ans*2', { constants: { ans: 3 } }); // 6
+calculy.evaluate('ans^x', { constants: { ans: 3, x: 2 } }); // 9
 calculy.evaluate('cos(90)'); // -0.44807361612
 calculy.evaluate('cos(90)', { deg: true }); // 0
 ```
@@ -59,9 +60,10 @@ Calculy supports most basic algebra that you would need for regular calculations
 
 `τ ` or `tau` ≈ 6.283185307179586
 
-### Ans
+### Custom constants
 
-`ans*2` = 3 (if the provided ans is 3)
+`ans*2` = 3 (if the provided constant `ans` is 3)
+`x^2` = 16 (if the provided constant `x` is 4)
 
 ### Shorthand multiplication
 
@@ -149,12 +151,12 @@ Will execute the math and give the answer. Can throw a `SyntaxError`.
 
 ### Options
 
-- `ans`: The previous answer. (default: `0`)
+- `constants`: Custom constants (`Object.<number>`), will override default constants with same name. (default: `{}`)
 - `deg`: Whether to use degrees instead instead of radians for trigonometry functions. (default: `false`)
 
 ## `calculy.parse(code: string, [options: Object]) => Object`
 
-Will return the raw AST, useful for custom evaluation.
+Will return the raw AST, useful for custom evaluation. Can throw a `SyntaxError`.
 
 ## `calculy.tokenize(code: string) => string[]`
 

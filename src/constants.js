@@ -1,7 +1,7 @@
 const GOLDEN_RATION = (1 + Math.sqrt(5)) / 2;
 const TAU = Math.PI * 2;
 
-export default {
+const constants = {
   τ: TAU,
   φ: GOLDEN_RATION,
   e: Math.E,
@@ -10,3 +10,10 @@ export default {
   tau: TAU,
   π: Math.PI,
 };
+
+export default function getConstants(custom) {
+  return {
+    ...constants,
+    ...custom,
+  };
+}

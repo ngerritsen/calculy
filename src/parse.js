@@ -1,7 +1,10 @@
-import constants from './constants';
+import getConstants from './constants';
 import getFunctions from './functions';
 
-export default function parse(tokens) {
+export default function parse(tokens, options) {
+  const constants = getConstants(options.constants);
+  const functions = getFunctions(options.deg);
+
   let position = 0;
 
   const result = parseExpression();
@@ -223,16 +226,16 @@ export default function parse(tokens) {
   function peek() {
     return tokens[position];
   }
-}
 
-function isNumber(token) {
-  return token && !isNaN(parseFloat(token));
-}
+  function isNumber(token) {
+    return token && !isNaN(parseFloat(token));
+  }
 
-function isConstant(token) {
-  return token && Boolean(constants[token.toLowerCase()]);
-}
+  function isConstant(token) {
+    return token && Boolean(constants[token.toLowerCase()]);
+  }
 
-function isFunction(token) {
-  return token && Boolean(getFunctions()[token.toLowerCase()]);
+  function isFunction(token) {
+    return token && Boolean(functions[token.toLowerCase()]);
+  }
 }
