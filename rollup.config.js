@@ -6,7 +6,7 @@ export default [
     input: "src/index.ts",
     output: {
       file: "lib/index.js",
-      exports: "default",
+      exports: "named",
       format: "cjs",
     },
     plugins: [typescript({ useTsconfigDeclarationDir: true }), terser()],
@@ -16,7 +16,7 @@ export default [
     output: {
       file: "dist/calculy.min.js",
       format: "iife",
-      exports: "default",
+      exports: "named",
       name: "Calculy",
     },
     plugins: [

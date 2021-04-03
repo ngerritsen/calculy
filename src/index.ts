@@ -1,13 +1,20 @@
 import evaluate from "./evaluate";
 import parse from "./parse";
 import tokenize from "./tokenize";
-import { Expression, Options } from "./types";
+import { Expression, Options, Calculy } from "./types";
 
-interface Calculy {
-  evaluate: (code: string, options?: Options) => number;
-  parse: (code: string, options?: Options) => Expression;
-  tokenize: (code: string) => string[];
-}
+export {
+  Calculy,
+  Options,
+  Constants,
+  ExpressionType,
+  Expression,
+  ModifierExpression,
+  PrimaryExpression,
+  ValueExpression,
+  FunctionExpression,
+  GroupExpression,
+} from "./types";
 
 const calculy: Calculy = {
   evaluate(code: string, options: Options = {}) {

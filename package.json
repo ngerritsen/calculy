@@ -1,6 +1,6 @@
 {
   "name": "calculy",
-  "version": "3.2.2",
+  "version": "3.2.3",
   "description": "Lightweight, zero dependency calculator engine",
   "main": "lib/index.js",
   "types": "types/index.d.ts",

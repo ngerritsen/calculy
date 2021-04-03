@@ -2,6 +2,12 @@ export type MathFunc = (...args: number[]) => number;
 export type Constants = Record<string, number>;
 export type MathFuncs = Record<string, MathFunc>;
 
+export interface Calculy {
+  evaluate: (code: string, options?: Options) => number;
+  parse: (code: string, options?: Options) => Expression;
+  tokenize: (code: string) => string[];
+}
+
 export type Options = {
   constants?: Constants;
   deg?: boolean;
