@@ -48,10 +48,5 @@
     "lib",
     "types"
   ],
-  "homepage": "https://github.com/ngerritsen/calculy#readme",
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm test"
-    }
-  }
+  "homepage": "https://github.com/ngerritsen/calculy#readme"
 }
