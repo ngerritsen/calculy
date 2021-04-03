@@ -1,13 +1,33 @@
 import { terser } from "rollup-plugin-terser";
+import typescript from "rollup-plugin-typescript2";
 
-export default {
-  input: "lib/index.js",
-  output: [
-    {
+export default [
+  {
+    input: "src/index.ts",
+    output: {
+      file: "lib/index.js",
+      exports: "default",
+      format: "cjs",
+    },
+    plugins: [typescript({ useTsconfigDeclarationDir: true }), terser()],
+  },
+  {
+    input: "src/index.ts",
+    output: {
       file: "dist/calculy.min.js",
       format: "iife",
+      exports: "default",
       name: "Calculy",
-      plugins: [terser()],
     },
-  ],
-};
+    plugins: [
+      typescript({
+        tsconfigOverride: {
+          compilerOptions: {
+            declaration: false,
+          },
+        },
+      }),
+      terser(),
+    ],
+  },
+];

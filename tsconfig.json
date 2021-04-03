@@ -1,13 +1,14 @@
 {
   "include": ["./src/**/*"],
+  "exclude": ["./src/**/*Test.ts"],
   "compilerOptions": {
-    "outDir": "lib",
-    "target": "es5",
-    "module": "commonjs",
+    "target": "esnext",
+    "module": "esnext",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "declaration": true
+    "declaration": true,
+    "declarationDir": "types"
   }
 }
