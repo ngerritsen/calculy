@@ -1,4 +1,4 @@
-export default function log(num, base = 10) {
+export default function log(num: number, base = 10): number {
   switch (base) {
     case 2:
       return Math.log2(num);

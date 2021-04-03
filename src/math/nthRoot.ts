@@ -1,4 +1,4 @@
-export default function nthRoot(num, n = 2) {
+export default function nthRoot(num: number, n = 2): number {
   if (n === 2) {
     return Math.sqrt(num);
   }

@@ -30,7 +30,7 @@ const P_LN = [
   0.36899182659531622704e-5,
 ];
 
-export default function factorial(num) {
+export default function factorial(num: number): number {
   const absNum = Math.abs(num);
 
   if (Number.isInteger(absNum) && absNum < 100) {
@@ -43,7 +43,7 @@ export default function factorial(num) {
 /**
  * Classic recursive factorial
  */
-function factorialRecursive(num) {
+function factorialRecursive(num: number): number {
   if (num === 0) {
     return 1;
   }
@@ -54,7 +54,7 @@ function factorialRecursive(num) {
 /**
  * Lanczos approximation
  */
-function gamma(num) {
+function gamma(num: number): number {
   if (num < 0.5) {
     return Math.PI / (Math.sin(Math.PI * num) * gamma(1 - num));
   } else if (num > 100) return Math.exp(lngamma(num));
@@ -73,8 +73,8 @@ function gamma(num) {
 /**
  * Spouge approximation (For large numbers)
  */
-function lngamma(num) {
-  if (num < 0) return Number('0/0');
+function lngamma(num: number): number {
+  if (num < 0) return Number("0/0");
   let x = P_LN[0];
   for (let i = P_LN.length - 1; i > 0; --i) x += P_LN[i] / (num + i);
   const t = num + G_LN + 0.5;

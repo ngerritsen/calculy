@@ -1,11 +1,12 @@
-import log from './math/log';
-import random from './math/random';
-import validate from './validate';
-import degree from './degree';
-import nthRoot from './math/nthRoot';
+import log from "./math/log";
+import random from "./math/random";
+import validate from "./validate";
+import degree from "./degree";
+import nthRoot from "./math/nthRoot";
+import { MathFuncs } from "./types";
 
 const functions = {
-  '√': validate(nthRoot, 1, 2),
+  "√": validate(nthRoot, 1, 2),
   abs: validate(Math.abs),
   acos: validate(Math.acos),
   asin: validate(Math.asin),
@@ -35,6 +36,6 @@ const degFunctions = {
   tan: degree(validate(Math.tan)),
 };
 
-export default function getFunctions(deg) {
+export default function getFunctions(deg: boolean | undefined): MathFuncs {
   return deg ? degFunctions : functions;
 }

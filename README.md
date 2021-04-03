@@ -13,13 +13,13 @@ npm install calculy
 ## Usage
 
 ```js
-import calculy from 'calculy';
+import calculy from "calculy";
 
-calculy.evaluate('1+2(3!)^2'); // 73
-calculy.evaluate('ans*2', { constants: { ans: 3 } }); // 6
-calculy.evaluate('ans^x', { constants: { ans: 3, x: 2 } }); // 9
-calculy.evaluate('cos(90)'); // -0.44807361612
-calculy.evaluate('cos(90)', { deg: true }); // 0
+calculy.evaluate("1+2(3!)^2"); // 73
+calculy.evaluate("ans*2", { constants: { ans: 3 } }); // 6
+calculy.evaluate("ans^x", { constants: { ans: 3, x: 2 } }); // 9
+calculy.evaluate("cos(90)"); // -0.44807361612
+calculy.evaluate("cos(90)", { deg: true }); // 0
 ```
 
 You can also directly include `./dist/calculy.min.js` from the npm package. This will make calculy available as the global variable `Calculy`.

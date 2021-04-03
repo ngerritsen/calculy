@@ -1,7 +1,13 @@
-import getConstants from './constants';
-import getFunctions from './functions';
+import getConstants from "./constants";
+import getFunctions from "./functions";
+import {
+  Expression,
+  ExpressionType,
+  FunctionExpression,
+  Options,
+} from "./types";
 
-export default function parse(tokens, options) {
+export default function parse(tokens: string[], options: Options) {
   const constants = getConstants(options.constants);
   const functions = getFunctions(options.deg);
 
@@ -15,17 +21,17 @@ export default function parse(tokens, options) {
 
   return result;
 
-  function parseExpression() {
+  function parseExpression(): Expression {
     let expression = parseMultiplicationExpression();
     let token = peek();
 
-    while (['+', '-'].includes(token)) {
+    while (["+", "-"].includes(token)) {
       consume();
 
       const rightExpression = parseMultiplicationExpression();
 
       expression = {
-        type: token,
+        type: token as ExpressionType.Add | ExpressionType.Subtract,
         left: expression,
         right: rightExpression,
       };
@@ -36,23 +42,23 @@ export default function parse(tokens, options) {
     return expression;
   }
 
-  function parseMultiplicationExpression() {
+  function parseMultiplicationExpression(): Expression {
     let expression = parseExponentialExpression();
     let token = peek();
 
     while (
-      ['*', '/', '('].includes(token) ||
+      ["*", "/", "("].includes(token) ||
       isConstant(token) ||
       isFunction(token)
     ) {
-      if (['*', '/'].includes(token)) {
+      if (["*", "/"].includes(token)) {
         consume();
       }
 
       const rightExpression = parseExponentialExpression();
 
       expression = {
-        type: token === '/' ? '/' : '*',
+        type: token === "/" ? ExpressionType.Divide : ExpressionType.Multiply,
         left: expression,
         right: rightExpression,
       };
@@ -63,17 +69,17 @@ export default function parse(tokens, options) {
     return expression;
   }
 
-  function parseExponentialExpression() {
+  function parseExponentialExpression(): Expression {
     let expression = parseNegativeExpression();
     let token = peek();
 
-    while (token === '^') {
+    while (token === "^") {
       consume();
 
       const rightExpression = parseNegativeExpression();
 
       expression = {
-        type: token,
+        type: ExpressionType.Exponential,
         left: expression,
         right: rightExpression,
       };
@@ -84,12 +90,12 @@ export default function parse(tokens, options) {
     return expression;
   }
 
-  function parseNegativeExpression() {
-    if (peek() === '-') {
+  function parseNegativeExpression(): Expression {
+    if (peek() === "-") {
       consume();
 
       return {
-        type: 'negative',
+        type: ExpressionType.Negative,
         of: parseModifierExpression(),
       };
     }
@@ -97,15 +103,15 @@ export default function parse(tokens, options) {
     return parseModifierExpression();
   }
 
-  function parseModifierExpression() {
+  function parseModifierExpression(): Expression {
     let expression = parsePrimaryExpression();
     let token = peek();
 
-    while (['!', '%'].includes(token)) {
+    while (["!", "%"].includes(token)) {
       consume();
 
       expression = {
-        type: token,
+        type: token as ExpressionType.Modulo | ExpressionType.Factorial,
         of: expression,
       };
 
@@ -115,37 +121,37 @@ export default function parse(tokens, options) {
     return expression;
   }
 
-  function parsePrimaryExpression() {
+  function parsePrimaryExpression(): Expression {
     const token = peek();
 
     if (isNumber(token)) {
       consume();
 
       return {
-        type: 'number',
+        type: ExpressionType.Number,
         value: token,
       };
     } else if (isConstant(token)) {
       consume();
 
       return {
-        type: 'constant',
+        type: ExpressionType.Constant,
         value: token,
       };
     } else if (isFunction(token)) {
       consume();
 
-      if (peek() !== '(') {
+      if (peek() !== "(") {
         throw new SyntaxError(`Unexpected token ${peek()}, expected "(".`);
       }
 
       consume();
 
-      if (peek() === ')') {
+      if (peek() === ")") {
         consume();
 
         return {
-          type: 'function',
+          type: ExpressionType.Function,
           value: token,
           args: [],
         };
@@ -154,30 +160,30 @@ export default function parse(tokens, options) {
       const arg = parseExpression();
       const args = [arg];
 
-      while (peek() === ',') {
+      while (peek() === ",") {
         consume();
         args.push(parseExpression());
       }
 
-      const expression = {
-        type: 'function',
+      const expression: FunctionExpression = {
+        type: ExpressionType.Function,
         value: token,
         args,
       };
 
-      if (peek() !== ')') {
+      if (peek() !== ")") {
         throw new SyntaxError(`Unexpected token ${peek()}, expected ")".`);
       }
 
       consume();
 
       return expression;
-    } else if (token === '(') {
+    } else if (token === "(") {
       consume();
 
       const expression = parseExpression();
 
-      if (peek() !== ')') {
+      if (peek() !== ")") {
         throw new SyntaxError(
           `Unexpected token "${token}", expected a closing parenthesis.`
         );
@@ -186,15 +192,15 @@ export default function parse(tokens, options) {
       consume();
 
       return {
-        type: 'group',
+        type: ExpressionType.Group,
         expression,
       };
-    } else if (token === '|') {
+    } else if (token === "|") {
       consume();
 
       const expression = parseExpression();
 
-      if (peek() !== '|') {
+      if (peek() !== "|") {
         throw new SyntaxError(
           `Unexpected token "${token}", expected a closing parenthesis.`
         );
@@ -203,14 +209,8 @@ export default function parse(tokens, options) {
       consume();
 
       return {
-        type: 'absolute',
+        type: ExpressionType.Absolute,
         of: expression,
-      };
-    } else if (token === 'ans') {
-      consume();
-
-      return {
-        type: 'ans',
       };
     } else {
       throw new SyntaxError(
@@ -223,19 +223,19 @@ export default function parse(tokens, options) {
     position++;
   }
 
-  function peek() {
+  function peek(): string {
     return tokens[position];
   }
 
-  function isNumber(token) {
-    return token && !isNaN(parseFloat(token));
+  function isNumber(token: string): boolean {
+    return Boolean(token && !isNaN(parseFloat(token)));
   }
 
-  function isConstant(token) {
-    return token && Boolean(constants[token.toLowerCase()]);
+  function isConstant(token: string): boolean {
+    return Boolean(token && constants[token.toLowerCase()]);
   }
 
-  function isFunction(token) {
-    return token && Boolean(functions[token.toLowerCase()]);
+  function isFunction(token: string): boolean {
+    return Boolean(token && functions[token.toLowerCase()]);
   }
 }
