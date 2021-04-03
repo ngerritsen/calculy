@@ -13,16 +13,16 @@ npm install calculy
 ## Usage
 
 ```js
-import calculy from "calculy";
+import { calculate } from "calculy";
 
-calculy.evaluate("1+2(3!)^2"); // 73
-calculy.evaluate("ans*2", { constants: { ans: 3 } }); // 6
-calculy.evaluate("ans^x", { constants: { ans: 3, x: 2 } }); // 9
-calculy.evaluate("cos(90)"); // -0.44807361612
-calculy.evaluate("cos(90)", { deg: true }); // 0
+calculate("1+2(3!)^2"); // 73
+calculate("ans*2", { constants: { ans: 3 } }); // 6
+calculate("ans^x", { constants: { ans: 3, x: 2 } }); // 9
+calculate("cos(90)"); // -0.44807361612
+calculate("cos(90)", { deg: true }); // 0
 ```
 
-You can also directly include `./dist/calculy.min.js` from the npm package. This will make calculy available as the global variable `Calculy`.
+You can also directly include `./dist/calculy.min.js` from the npm package. This will make all calculy functions available under the global variable `Calculy`.
 
 ## Syntax
 
@@ -145,7 +145,7 @@ Calculy supports most basic algebra that you would need for regular calculations
 
 ## API
 
-## `calculy.evaluate(code: string, [options: Object]) => Number`
+## `calculate(code: string, [options: Object]) => number`
 
 Will execute the math and give the answer. Can throw a `SyntaxError`.
 
@@ -154,10 +154,14 @@ Will execute the math and give the answer. Can throw a `SyntaxError`.
 - `constants`: Custom constants (`Object.<number>`), will override default constants with same name. (default: `{}`)
 - `deg`: Whether to use degrees instead instead of radians for trigonometry functions. (default: `false`)
 
-## `calculy.parse(code: string, [options: Object]) => Object`
+## `tokenize(code: string) => string[]`
+
+Will return a list of the tokens that calculy parses. Can come in handy for input validation/formatting.
+
+## `parse(tokens: string[], [options: Object]) => Expression`
 
 Will return the raw AST, useful for custom evaluation. Can throw a `SyntaxError`.
 
-## `calculy.tokenize(code: string) => string[]`
+## `evaluate(expression: Expression, [options: Object]) => number`
 
-Will return a list of the tokens that calculy parses. Can come in handy for input validation/formatting.
+Will evaluate a calculation expression;

@@ -7,7 +7,7 @@ import {
   Options,
 } from "./types";
 
-export default function parse(tokens: string[], options: Options) {
+export default function parse(tokens: string[], options: Options = {}) {
   const constants = getConstants(options.constants);
   const functions = getFunctions(options.deg);
 
