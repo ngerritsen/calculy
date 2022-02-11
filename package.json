@@ -1,6 +1,6 @@
 {
   "name": "calculy",
-  "version": "4.0.0",
+  "version": "4.0.2",
   "description": "Lightweight, zero dependency calculator engine",
   "main": "lib/index.js",
   "types": "types/index.d.ts",
@@ -30,7 +30,7 @@
   "prepublish": "npm run build",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ngerritsen/calculy.git"
+    "url": "git+https://gitlab.com/ngerritsen/calculy.git"
   },
   "keywords": [
     "calculator",
@@ -41,12 +41,12 @@
   "author": "Niels Gerritsen",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ngerritsen/calculy/issues"
+    "url": "https://gitlab.com/ngerritsen/calculy/issues"
   },
   "files": [
     "dist",
     "lib",
     "types"
   ],
-  "homepage": "https://github.com/ngerritsen/calculy#readme"
+  "homepage": "https://gitlab.com/ngerritsen/calculy#readme"
 }

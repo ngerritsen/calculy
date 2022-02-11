@@ -1,3 +1,5 @@
+[![pipeline status](https://gitlab.com/ngerritsen/calculy/badges/master/pipeline.svg)](https://gitlab.com/ngerritsen/calculy/-/commits/master)
+
 # Calculy
 
 Lightweight, zero dependency calculator engine.
